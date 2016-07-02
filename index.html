@@ -1,1 +1,109 @@
-Hello
+<!-- 
+        <header>
+            <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Angular Routing Example</a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
+                    <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+                </ul>
+            </div>
+            </nav>
+        </header>
+    <body ng-controller="mainController">
+    <div id="main">
+        <div ng-view></div>
+    </div>
+
+    </body>
+    </html> -->
+
+
+<!DOCTYPE html>
+<html lang="cs" ng-app="catcher">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+        <meta name="author" content="">
+		
+		<title>Catcher - Ultimate Frisbee Scorer</title>
+
+		<!-- Bootstrap Core CSS -->
+	    <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	    <!-- MetisMenu CSS -->
+	    <link href="components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+	    <!-- Timeline CSS -->
+	    <link href="dist/css/timeline.css" rel="stylesheet">
+
+	    <!-- Custom CSS -->
+	    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+
+	    <!-- Morris Charts CSS -->
+	    <link href="components/morrisjs/morris.css" rel="stylesheet">
+
+	    <!-- Custom Fonts -->
+	    <link href="components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	    
+		<!-- TODO: Advanced styles -->
+		<link href="css/app.css" rel="stylesheet">
+
+		<!-- AngularJS -->
+		<script src="components/angularjs/angular.min.js"></script>
+		<script src="components/angularjs/angular-route.min.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/controllers.js"></script>
+
+		<!-- MD5 for gravatar -->
+		<!-- <script src="js/md5.js"></script> -->
+
+		<!-- Vendor: Angular, followed by our custom Javascripts -->
+		<!-- <script src="js/angular-sanitize.min.js"></script> -->
+		<!-- <script src="js/angular-route.min.js"></script> -->
+		<!-- <script src="js/angular-translate.min.js"></script> -->
+		<!-- <script src="js/angular-messages.min.js"></script> -->
+		<!-- <script src="js/angular-flash.js"></script> -->
+		<!-- <script src="js/isteven-multi-select.js"></script> -->
+		<!-- <script src="js/jquery.timepicker.min.js"></script> -->
+		<!-- <script src="js/angular-strap.min.js"></script> -->
+
+	</head>
+	<body ng-controller="mainController">
+
+		<div ng-include='"pages/navigation.html"'></div>
+		
+		<!-- <div class="container">
+			<flash:messages></flash:messages>
+		</div> -->
+
+		<div ng-view></div>
+
+		<!-- jQuery -->
+		<script src="components/jquery/dist/jquery.min.js"></script>
+
+		<!-- Bootstrap Core JavaScript -->
+		<script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<!-- Metis Menu Plugin JavaScript -->
+		<script src="components/metisMenu/dist/metisMenu.min.js"></script>
+
+		<!-- Morris Charts JavaScript -->
+		<script src="components/raphael/raphael-min.js"></script>
+		<script src="components/morrisjs/morris.min.js"></script>
+		<script src="js/morris-data.js"></script>
+
+		<!-- Custom Theme JavaScript -->
+		<script src="dist/js/sb-admin-2.js"></script>
+
+	</body>
+
+
+
+</html>
