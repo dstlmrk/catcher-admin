@@ -1,0 +1,148 @@
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/#/"><i class="glyphicon glyphicon-send fa-fw"></i> Catcher Beta</a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+        <li><a href="" data-toggle="modal" data-target="#loginModal">Přihlásit se</a></li>
+        <li><a href="" data-toggle="modal" data-target="#registrationModal">Registrace</a></li>
+        <li><a href="#"><i class="glyphicon glyphicon-user fa-fw"></i> Karel Nováček</a></li>
+        <li><a href="#">Odhlásit se</a></li>
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <li>
+                    <a href="#/"><i class="glyphicon glyphicon-home fa-fw"></i> Úvodní strana</a>
+                </li>
+                <li>
+                    <a href="#/tournaments"><i class="fa fa-sitemap fa-fw"></i> Moje turnaje</a>
+                </li>
+                <li>
+                    <a href="#/statistics"><i class="glyphicon glyphicon-stats fa-fw"></i> Statistiky</a>
+                </li>
+                <li>
+                    <a href="#/history"><i class="glyphicon glyphicon-book fa-fw"></i> Historie</a>
+                </li>
+                <li>
+                    <a href="#/settings"><i class="glyphicon glyphicon-cog fa-fw"></i> Nastavení</a>
+                </li>
+                <li>
+                    <a href="#/about"><i class="glyphicon glyphicon-info-sign fa-fw"></i> O aplikaci</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Přihlášení</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+  <fieldset>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-lg-2 control-label">Heslo</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="inputPassword" placeholder="Heslo">
+      </div>
+    </div>  
+  </fieldset>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+        <button type="button" class="btn btn-default">Obnovit heslo</button>
+        <button type="button" class="btn btn-primary">Přihlásit se</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Registration Modal -->
+<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Registrace</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+  <fieldset>
+    <div class="form-group">
+      <label for="inputFirstname" class="col-lg-3 control-label">Jméno</label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" id="inputFirstname" placeholder="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputLastname" class="col-lg-3 control-label">Příjmení</label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" id="inputLastname" placeholder="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-3 control-label">Email</label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" id="inputEmail" placeholder="">
+        <span class="help-block">Na emailovou adresu vám pošleme potvrzení o registraci. Email zároveň slouží jako přihlašovací jméno. Přihlášení je možné až po potvrzení.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-lg-3 control-label">Heslo</label>
+      <div class="col-lg-9">
+        <input type="password" class="form-control" id="inputPassword" placeholder="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword2" class="col-lg-3 control-label">Kontrola hesla</label>
+      <div class="col-lg-9">
+        <input disabled="" type="password" class="form-control" id="inputPassword" placeholder="">
+      </div>
+    </div>
+  </fieldset>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+        <button type="button" class="btn btn-primary">Registrace</button>
+      </div>
+    </div>
+  </div>
+</div>
