@@ -19,6 +19,12 @@
                 controller  : 'mainController'
             })
 
+            // route for the home page
+            .when('/home', {
+                templateUrl : 'pages/home.html',
+                controller  : 'mainController'
+            })
+
             .when('/tournaments', {
                 templateUrl : 'pages/tournaments.html',
                 controller  : 'tournamentsController'
