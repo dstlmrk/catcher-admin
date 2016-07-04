@@ -5,9 +5,6 @@
     // configure our routes
     catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         
-        // Expose XHR requests to server
-        // $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
 
@@ -19,7 +16,8 @@
                 controller  : 'mainController'
             })
 
-            // route for the home page
+            // route for the home page (pouzito, protoze na GitHub pages
+            // nemuzu nastavovat webserver a pri pouhem lomitku se presmerovava pryc)
             .when('/home', {
                 templateUrl : 'pages/home.html',
                 controller  : 'mainController'
@@ -57,10 +55,6 @@
                 // controller  : 'aboutController'
             });
 
-            // .when('/tournaments', {
-            //     templateUrl : 'pages/tournaments.html',
-            //     controller  : 'contactController'
-            // })
     }]);
 
     // create the controller and inject Angular's $scope
