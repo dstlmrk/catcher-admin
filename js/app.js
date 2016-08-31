@@ -1,10 +1,10 @@
 // create the module and name it catcher
 // also include ngRoute for all our routing needs
-var catcher = angular.module('catcher', ['ngRoute', 'ui.bootstrap']);
+var catcher = angular.module('catcher', ['ngRoute', 'ui.bootstrap', 'ngFlash']);
 
 // configure our routes
 catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    
+
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
 
@@ -25,7 +25,7 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
 
         .when('/tournaments', {
             templateUrl : 'pages/tournaments.html',
-            controller  : 'tournamentsController'
+            // controller  : 'tournamentsController'
         })
 
         .when('/statistics', {
@@ -46,7 +46,7 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
         // route for the about page
         .when('/about', {
             templateUrl : 'pages/about.html',
-            controller  : 'aboutController'
+            // controller  : 'aboutController'
         })
 
         // tournament detail
@@ -59,26 +59,71 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
         .when('/match', {
             templateUrl : 'pages/match.html',
             // controller  : 'aboutController'
-        });
+        })
+
+        // match detail
+        .when('/admin', {
+            templateUrl : 'pages/admin.html',
+            controller  : 'adminController'
+        })
+
+        // match detail
+        .when('/new-tournament', {
+            templateUrl : 'pages/new.html',
+            // controller  : 'aboutController'
+        })
+
+        .otherwise({redirectTo: '/'});
 
 }]);
 
-angular.module('catcher').controller('TabsDemoCtrl', function ($scope, $window) {
-  $scope.tabs = [
-    { title:'Dynamic Title 1', content:'Dynamic content 1' },
-    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-  ];
 
-  $scope.alertMe = function() {
-    setTimeout(function() {
-      $window.alert('You\'ve selected the alert tab!');
-    });
-  };
 
-  $scope.model = {
-    name: 'Tabs'
-  };
-});
+catcher.factory('dataFactory', ['$http', function($http) {
+
+    var urlBase = 'http://catcher.zlutazimnice.cz/api/club/1';
+    var dataFactory = {};
+
+    dataFactory.getClubs = function () {
+        return $http.get(urlBase);
+    };
+    return dataFactory;
+}]);
+
+// catcher.service('dataService', ['$http', function ($http) {
+
+//     var urlBase = 'http://catcher.zlutazimnice.cz/api/club';
+
+//     this.getClubs = function () {
+//         return $http.get(urlBase);
+//     };
+// }]);
+
+
+
+
+// catcher.controller('Login', function($scope, $location, API, flash) {
+
+//     $scope.form = {}
+
+// })
+
+// angular.module('catcher').controller('TabsDemoCtrl', function ($scope, $window) {
+//   $scope.tabs = [
+//     { title:'Dynamic Title 1', content:'Dynamic content 1' },
+//     { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
+//   ];
+
+//   $scope.alertMe = function() {
+//     setTimeout(function() {
+//       $window.alert('You\'ve selected the alert tab!');
+//     });
+//   };
+
+//   $scope.model = {
+//     name: 'Tabs'
+//   };
+// });
 
 
 // angular.module('ui.bootstrap.demo', ['ngAnimate', 'ui.bootstrap']);
@@ -98,30 +143,3 @@ angular.module('catcher').controller('TabsDemoCtrl', function ($scope, $window) 
 //     name: 'Tabs'
 //   };
 // });
-
-
-// create the controller and inject Angular's $scope
-catcher.controller('mainController', function($scope) {
-    // create a message to display in our view
-    $scope.message = 'Everyone come and see how good I look!';
-});
-
-catcher.controller('tournamentsController', function($scope) {
-    $scope.message = 'Contact us! JK. This is just a demo.';
-});
-
-catcher.controller('statisticsController', function($scope) {
-    $scope.message = 'Contact us! JK. This is just a demo.';
-});
-
-catcher.controller('historyController', function($scope) {
-    $scope.message = 'Contact us! JK. This is just a demo.';
-});
-
-catcher.controller('settingsController', function($scope) {
-    $scope.message = 'Contact us! JK. This is just a demo.';
-});
-
-catcher.controller('aboutController', function($scope) {
-    $scope.message = 'Look! I am an about page.';
-});
