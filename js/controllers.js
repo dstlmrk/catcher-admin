@@ -6,6 +6,9 @@ catcher.controller('mainController', function($scope) {
 
 catcher.controller('tournamentsController', function($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
+    $scope.model = {
+        name: 'Tabs'
+    };
 });
 
 catcher.controller('statisticsController', function($scope) {
@@ -22,6 +25,8 @@ catcher.controller('settingsController', function($scope) {
 
 catcher.controller('aboutController', function($scope) {
     $scope.message = 'Look! I am an about page.';
+    
+
 });
 
 // catcher.controller('adminController', ['$scope', 'dataFactory', 'flash',

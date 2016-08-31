@@ -20,7 +20,7 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
         // nemuzu nastavovat webserver a pri pouhem lomitku se presmerovava pryc)
         .when('/home', {
             templateUrl : 'pages/home.html',
-            controller  : 'mainController'
+            // controller  : 'mainController'
         })
 
         .when('/tournaments', {
@@ -52,7 +52,7 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
         // tournament detail
         .when('/tournament', {
             templateUrl : 'pages/tournament.html',
-            // controller  : 'aboutController'
+            controller  : 'tournamentsController'
         })
 
         // match detail
@@ -77,8 +77,6 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
 
 }]);
 
-
-
 catcher.factory('dataFactory', ['$http', function($http) {
 
     var urlBase = 'http://catcher.zlutazimnice.cz/api/club/1';
@@ -100,46 +98,19 @@ catcher.factory('dataFactory', ['$http', function($http) {
 // }]);
 
 
+angular.module('catcher').controller('TabsDemoCtrl', function ($scope, $window) {
+  $scope.tabs = [
+    { title:'Dynamic Title 1', content:'Dynamic content 1' },
+    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
+  ];
 
+  $scope.alertMe = function() {
+    setTimeout(function() {
+      $window.alert('You\'ve selected the alert tab!');
+    });
+  };
 
-// catcher.controller('Login', function($scope, $location, API, flash) {
-
-//     $scope.form = {}
-
-// })
-
-// angular.module('catcher').controller('TabsDemoCtrl', function ($scope, $window) {
-//   $scope.tabs = [
-//     { title:'Dynamic Title 1', content:'Dynamic content 1' },
-//     { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-//   ];
-
-//   $scope.alertMe = function() {
-//     setTimeout(function() {
-//       $window.alert('You\'ve selected the alert tab!');
-//     });
-//   };
-
-//   $scope.model = {
-//     name: 'Tabs'
-//   };
-// });
-
-
-// angular.module('ui.bootstrap.demo', ['ngAnimate', 'ui.bootstrap']);
-// angular.module('ui.bootstrap.demo').controller('TabsDemoCtrl', function ($scope, $window) {
-//   $scope.tabs = [
-//     { title:'Dynamic Title 1', content:'Dynamic content 1' },
-//     { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-//   ];
-
-//   $scope.alertMe = function() {
-//     setTimeout(function() {
-//       $window.alert('You\'ve selected the alert tab!');
-//     });
-//   };
-
-//   $scope.model = {
-//     name: 'Tabs'
-//   };
-// });
+  $scope.model = {
+    name: 'Tabs'
+  };
+});
