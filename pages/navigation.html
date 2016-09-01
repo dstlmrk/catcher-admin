@@ -7,17 +7,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="home"><i class="glyphicon glyphicon-send fa-fw"></i> Catcher Beta</a>
+        <a class="navbar-brand" href="home"><i class="glyphicon glyphicon-send fa-fw"></i> Catcher Alpha</a>
     </div>
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-top-links navbar-right">
-        <li><a href="" data-toggle="modal" data-target="#loginModal">Přihlásit se</a></li>
-        <li><a href="" data-toggle="modal" data-target="#registrationModal">Registrace</a></li>
-        <li><a href=""><i class="glyphicon glyphicon-user fa-fw"></i> Karel Nováček</a></li>
-        <li><a href="">Odhlásit se</a></li>
+        <li><a ng-hide="logged()" href="" data-toggle="modal" data-target="#loginModal">Přihlásit se</a></li>
+        <li><a ng-hide="logged()" href="" data-toggle="modal" data-target="#registrationModal">Registrace</a></li>
+        <li><a ng-show="logged()" href=""><i class="glyphicon glyphicon-user fa-fw"></i> Karel Nováček</a></li>
+        <li><a ng-show="logged()" ng-click="logout()" href="">Odhlásit se</a></li>
     </ul>
     <!-- /.navbar-top-links -->
+
 
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
@@ -36,7 +37,7 @@
                 <li>
                     <a href="home"><i class="glyphicon glyphicon-home fa-fw"></i> Úvodní strana</a>
                 </li>
-                <li>
+                <li ng-show="logged()">
                     <a href="tournaments"><i class="fa fa-sitemap fa-fw"></i> Moje turnaje</a>
                 </li>
                 <li>
@@ -45,13 +46,13 @@
                 <li>
                     <a href="history"><i class="glyphicon glyphicon-book fa-fw"></i> Historie</a>
                 </li>
-                <li>
+                <li ng-show="logged()">
                     <a href="settings"><i class="glyphicon glyphicon-cog fa-fw"></i> Nastavení</a>
                 </li>
                 <li>
                     <a href="about"><i class="glyphicon glyphicon-info-sign fa-fw"></i> O aplikaci</a>
                 </li>
-                <li>
+                <li ng-show="logged()">
                     <a href="admin"><i class="glyphicon glyphicon-pencil fa-fw"></i> Admin</a>
                 </li>
             </ul>
@@ -61,40 +62,40 @@
     <!-- /.navbar-static-side -->
 </nav>
 
-
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Přihlášení</h4>
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
+         </div>
+         <form class="form-horizontal" name="loginForm" novalidate>
+           <div class="modal-body">
+             <!-- <fieldset> -->
+                <div class="form-group" show-errors>
+                   <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                   <div class="col-lg-10">
+                      <input type="text" class="form-control" name="login.email" placeholder="test" ng-model="login.email" required />
+                      <span ng-show="loginForm.login.email.$dirty && loginForm.login.email.$error.required" class="help-block">Email is required</span>
+                   </div>
+                </div>
+                <div class="form-group" show-errors>
+                   <label for="inputPassword" class="col-lg-2 control-label">Heslo</label>
+                   <div class="col-lg-10">
+                      <input type="password" class="form-control" name="login.password" placeholder="test" ng-model="login.password" required />
+                      <span ng-show="loginForm.login.password.$dirty && loginForm.login.password.$error.required" class="help-block">Password is required</span>
+                   </div>
+                </div>
+             <!-- </fieldset> -->
+           </div>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-default" disabled="">Obnovit heslo</button>
+              <button ng-disabled="loginForm.$invalid || dataLoading" type="submit" class="btn btn-primary" ng-click="login()" data-dismiss="modal">Přihlásit se</button>
+           </div>
+         </form>
       </div>
-      <div class="modal-body">
-        <form class="form-horizontal">
-  <fieldset>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-      <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputEmail" placeholder="Email">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword" class="col-lg-2 control-label">Heslo</label>
-      <div class="col-lg-10">
-        <input type="password" class="form-control" id="inputPassword" placeholder="Heslo">
-      </div>
-    </div>  
-  </fieldset>
-</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
-        <button type="button" class="btn btn-default">Obnovit heslo</button>
-        <button type="button" class="btn btn-primary">Přihlásit se</button>
-      </div>
-    </div>
-  </div>
+   </div>
 </div>
 
 <!-- Registration Modal -->
