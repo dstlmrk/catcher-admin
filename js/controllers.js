@@ -8,6 +8,7 @@ catcher.controller('mainController', ['$scope', 'Flash',
 
         // $scope.loginForm = {}
 
+        // TODO: zatim budu do hlavicek vkladat rucne api_key a az pozdeji udelam role a pristupy
         $scope.login = function(data) {
             if ($scope.login.email === "test" && $scope.login.password === "test") {
                 logged = true
@@ -27,7 +28,25 @@ catcher.controller('mainController', ['$scope', 'Flash',
         }
 
         // TODO: udelat login: 
-        // https://github.com/veselj43/cvut-fit-bibap-bachelors-thesis/blob/master/src/js/controllers.js#L49
+        // https://github.com/veselj43/
+        // cvut-fit-bibap-bachelors-thesis/blob/master/src/js/controllers.js#L49
+}]);
+
+// rest api resources
+catcher.factory('Clubs', function ($resource) {
+        return $resource('http://catcher.zlutazimnice.cz/api/clubs');
+    });
+
+catcher.factory('Tournaments', function ($resource) {
+        return $resource('http://catcher.zlutazimnice.cz/api/tournaments');
+    });
+
+// controllers
+catcher.controller('historyController', ['$scope', '$resource', 'Flash', 'Tournaments',
+        function ($scope, $resource, Flash, Tournaments) {
+            Tournaments.get(function(data){ 
+               $scope.tournaments = data;
+            });
 }]);
 
 catcher.controller('tournamentsController', function($scope) {
@@ -35,10 +54,6 @@ catcher.controller('tournamentsController', function($scope) {
 });
 
 catcher.controller('statisticsController', function($scope) {
-    $scope.message = 'Contact us! JK. This is just a demo.';
-});
-
-catcher.controller('historyController', function($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
 });
 
@@ -50,109 +65,18 @@ catcher.controller('aboutController', function($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
 });
 
-// var helloApp = angular.module("helloApp", [ 'ngResource' ]);
-// helloApp.controller("HttpController", [ '$scope', '$resource',
-//         function($scope, $resource) {
-//             //
-//             // GET Action Method
-//             //
-//             var User = $resource('/user/:userId', {userId:'@userId'});
-//             User.get( {userId:25}, function(user){
-//                 $scope.profile = user;
-//             })
-//             //
-//             // Query Action Method
-//             //
-//             var UserProfiles = $resource('/getAllProfiles');
-//             UserProfiles.query(function(profiles){
-//                 $scope.profiles = profiles;                 
-//             });
-//         } ]);
-
-
-// catcher.controller('adminController', ['$scope', 'dataFactory', 'flash',
-//         function ($scope, dataFactory, flash) {
-
-//     $scope.message = 'Look! I am an admin page.';
-//     // flash.create('success', "dxxxxxxxx");
-//     // flash('danger','Turnaj byl vytvořenss.');
-// }]);
-
-catcher.factory('Clubs', function ($resource) {
-        return $resource('http://catcher.zlutazimnice.cz/api/clubs');
-    });
-
-
-
-catcher.controller('adminController', ['$scope', '$resource', 'dataFactory', 'Flash', 'Clubs',
-        function ($scope, $resource, dataFactory, Flash, Clubs) {
-
-            // var User = $resource('http://catcher.zlutazimnice.cz/api/club/:userId', {userId:'@userId'});
-            // User.get( {userId:1}, function(user){
-            //     $scope.profile = user;
-            // })
+catcher.controller('adminController', ['$scope', '$resource', 'Flash', 'Clubs',
+        function ($scope, $resource, Flash, Clubs) {
 
             Clubs.get(function(data){ 
-               $scope.clubs = data.items;
-               $scope.count = data.count;
+               $scope.clubs = data
             });
 
-            // dataFactory.getClubs().then(function (response) {
-            //     // $scope.message = response.data;
-            //     $scope.clubs = response.data.items;
-            //     // Flash.create('success', 'Able to load data: ' + angular.toJson(response.data));
-            // }, function (error) {
-            //     Flash.create('danger', 'Unable to load data: ' + error.message)
-            // });
+            $scope.message = 'Look! I am an admin page.';
 
-            // $scope.clubs = Clubs.get().$save();
-            // // console.log(Clubs.get().count)
-            // $scope.items = typeof $scope.clubs
-
-            // var Clubs = $resource('http://catcher.zlutazimnice.cz/api/clubs');
-            // angular.fromJson(json);
-            // $scope.clubs = typeof Clubs.get();
-
-            // UserProfiles.query(function(profiles){
-            //     $scope.profiles = profiles;                
-            // });
-
-    $scope.message = 'Look! I am an admin page.';
-
-    $scope.success = function () {
-        var message = '<strong>Well done!</strong> You successfully read this important alert message.';
-        Flash.create('success', message);
-        $scope.message = message;
-    };
-
-
-
-    // function getClubs() {
-    //     dataFactory.getClubs()
-    //         .then(function (response) {
-    //             // $scope.message = response.data;
-    //             Flash.create('success', 'Able to load data: ' + angular.toJson(response.data));
-    //         }, function (error) {
-    //             Flash.create('danger', 'Unable to load data: ' + error.message)
-    //         });
-    // }
+            $scope.success = function () {
+                var message = '<strong>Well done!</strong> You successfully read this important alert message.';
+                Flash.create('success', message);
+                $scope.message = message;
+            };
 }]);
-
-// var helloApp = angular.module("helloApp", [ 'ngResource' ]);
-// helloApp.controller("HttpController", [ '$scope', '$resource',
-//         function($scope, $resource) {
-//             //
-//             // GET Action Method
-//             //
-//             var User = $resource('/user/:userId', {userId:'@userId'});
-//             User.get( {userId:25}, function(user){
-//                 $scope.profile = user;
-//             })
-//             //
-//             // Query Action Method
-//             //
-//             var UserProfiles = $resource('/getAllProfiles');
-//             UserProfiles.query(function(profiles){
-//                 $scope.profiles = profiles;                 
-//             });
-//         } ]);

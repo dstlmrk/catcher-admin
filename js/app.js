@@ -35,7 +35,7 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
 
         .when('/history', {
             templateUrl : 'pages/history.html',
-            // controller  : 'contactController'
+            controller  : 'historyController'
         })
 
         .when('/settings', {
@@ -118,34 +118,16 @@ catcher.directive('showErrors', function() {
     }
   });
 
-catcher.factory('dataFactory', ['$http', function($http) {
+// catcher.factory('dataFactory', ['$http', function($http) {
 
-    var urlBase = 'http://catcher.zlutazimnice.cz/api/';
-    var dataFactory = {};
+//     var urlBase = 'http://catcher.zlutazimnice.cz/api/';
+//     var dataFactory = {};
 
-    dataFactory.getClubs = function () {
-        return $http.get(urlBase + 'clubs');
-    };
-
-    // dataFactory.getClubs = function () {
-    //     $http.get(urlBase + 'clubs')
-    //         .success(function(data) {
-    //             return data;
-    //         });
-    // };
-
-    return dataFactory;
-}]);
-
-// catcher.service('dataService', ['$http', function ($http) {
-
-//     var urlBase = 'http://catcher.zlutazimnice.cz/api/club';
-
-//     this.getClubs = function () {
-//         return $http.get(urlBase);
+//     dataFactory.getClubs = function () {
+//         return $http.get(urlBase + 'clubs');
 //     };
+//     return dataFactory;
 // }]);
-
 
 // slouzi pro tabulatory na strance s turnajem
 angular.module('catcher').controller('TabsDemoCtrl', function ($scope, $window) {
