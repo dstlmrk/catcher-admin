@@ -16,7 +16,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <p>Co je to ...</p>
+                            <p>Aplikace bude sloužit týmům pro organizování turnajů a odevzdavání Spirit of the Game na turnajích pořádaných touto aplikací.</p>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -68,8 +68,9 @@
                             <i class="glyphicon glyphicon-plus fa-fw"></i> Vytvořit turnaj
                         </div>
                         <div class="panel-body">
-                            <p>Pokud chcete využívat aplikaci Catcher ke správě turnajů v Ultimate Frisbee, je potřeba se přihlásit nebo zaregistrovat.</p>
-                            <a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#registrationModal">Registrace</a>
+                            <p ng-hide="logged()">Pokud chcete využívat aplikaci Catcher ke správě turnajů v Ultimate Frisbee, je potřeba se přihlásit nebo zaregistrovat.</p>
+                            <a ng-hide="logged()" href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#registrationModal">Registrace</a>
+                            <a ng-show="logged()" href="new-tournament" class="btn btn-success btn-block">Nový turnaj</a>
                         </div>
                         <!-- /.panel-body -->
                     </div>

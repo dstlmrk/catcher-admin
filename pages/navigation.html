@@ -55,6 +55,7 @@
                 <li>
                     <a href="admin"><i class="glyphicon glyphicon-pencil fa-fw"></i> Admin</a>
                 </li>
+                <small>. Ctrl + Shift + R = hard reload</small>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
@@ -74,15 +75,15 @@
            <div class="modal-body">
              <!-- <fieldset> -->
                 <div class="form-group" show-errors>
-                   <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-                   <div class="col-lg-10">
+                   <label for="inputEmail" class="col-lg-3 control-label">Přihlašovací jméno</label>
+                   <div class="col-lg-9">
                       <input type="text" class="form-control" name="login.email" placeholder="test" ng-model="login.email" required />
                       <span ng-show="loginForm.login.email.$dirty && loginForm.login.email.$error.required" class="help-block">Email is required</span>
                    </div>
                 </div>
                 <div class="form-group" show-errors>
-                   <label for="inputPassword" class="col-lg-2 control-label">Heslo</label>
-                   <div class="col-lg-10">
+                   <label for="inputPassword" class="col-lg-3 control-label">Heslo</label>
+                   <div class="col-lg-9">
                       <input type="password" class="form-control" name="login.password" placeholder="test" ng-model="login.password" required />
                       <span ng-show="loginForm.login.password.$dirty && loginForm.login.password.$error.required" class="help-block">Password is required</span>
                    </div>
@@ -110,35 +111,17 @@
         <form class="form-horizontal">
   <fieldset>
     <div class="form-group">
-      <label for="inputFirstname" class="col-lg-3 control-label">Jméno</label>
+      <label for="inputFirstname" class="col-lg-3 control-label">Přihlašovací jméno</label>
       <div class="col-lg-9">
-        <input type="text" class="form-control" id="inputFirstname" placeholder="">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputLastname" class="col-lg-3 control-label">Příjmení</label>
-      <div class="col-lg-9">
-        <input type="text" class="form-control" id="inputLastname" placeholder="">
+        <input type="text" class="form-control" id="inputFirstname" placeholder="zluta-zimnice">
+        <span class="help-block">Bude sloužit vašemu týmu pro přihlašování.</span>
       </div>
     </div>
     <div class="form-group">
       <label for="inputEmail" class="col-lg-3 control-label">Email</label>
       <div class="col-lg-9">
         <input type="text" class="form-control" id="inputEmail" placeholder="">
-        <span class="help-block">Na emailovou adresu vám pošleme potvrzení o registraci. Email zároveň slouží jako přihlašovací jméno. Přihlášení je možné až po potvrzení.</span>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword" class="col-lg-3 control-label">Heslo</label>
-      <div class="col-lg-9">
-        <input type="password" class="form-control" id="inputPassword" placeholder="">
-        <span class="help-block">Heslo musí být alespoň šest znaků dlouhé.</span>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputPassword2" class="col-lg-3 control-label">Kontrola hesla</label>
-      <div class="col-lg-9">
-        <input disabled="" type="password" class="form-control" id="inputPassword" placeholder="">
+        <span class="help-block">Na emailovou adresu vám pošleme potvrzení o registraci. Přihlášení je možné až po potvrzení.</span>
       </div>
     </div>
   </fieldset>

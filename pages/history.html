@@ -10,7 +10,7 @@
     <div class="panel-heading">Podrobné výsledky turnajů</div>
     <div class="panel-body">
       <div class="list-group">
-        <a ng-repeat="tournament in tournaments.items" href="tournament" class="list-group-item">
+        <a ng-repeat="tournament in tournaments.items" href="tournament/{{tournament.id}}" class="list-group-item">
           <h4 class="list-group-item-heading">{{tournament.name}}</h4>
           <p class="list-group-item-text">
             <span ng-if="tournament.divisionId==1" class="label label-danger">women</span>

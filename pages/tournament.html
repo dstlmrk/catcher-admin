@@ -2,19 +2,13 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Partie Pinčlů</h1>
+                <h1 class="page-header">{{tournament.name}}</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-9">
-                <!-- TODO: presunout k ostatnimu CSS -->
-                <style type="text/css">
-                    form.tab-form-demo .tab-pane {
-                    margin: 20px 0px;
-                    }
-                </style>
                 <div ng-controller="TabsDemoCtrl">
                     <form name="outerForm" class="tab-form-demo">
                         <uib-tabset active="activeForm">
@@ -687,9 +681,16 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <ul>
+                            <li>id: {{tournament.id}}</li>
+                            <li>teams: {{tournament.teams}}</li>
+                            <li>divisionId: {{tournament.divisionId}}</li>
+                            <li>userId: {{tournament.userId}}</li>
+                            <li>ready: {{tournament.ready}}</li>
+                            <li>caldTournament: {{tournament.caldTournament}}</li>
+                            <li>terminated: {{tournament.terminated}}</li>
                             <li><span class="label label-danger">women</span> divize</li>
-                            <li>13. 6. 2016 - 14. 6. 2016</li>
-                            <li>Brno, Czech Republic</li>
+                            <li>{{tournament.startDate | date:'dd. MM. yyyy'}} - {{tournament.endDate | date:'dd. MM. yyyy'}}</li>
+                            <li>{{tournament.city}}, {{tournament.country}}</li>
                             <li>12 týmů a 42 zápasů</li>
                             <li>zápasy dlouhé 32 minut</li>
                         </ul>

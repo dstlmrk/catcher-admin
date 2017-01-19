@@ -1,0 +1,4 @@
+/* pridano pro odsazeni mezi tabama a obsahem */
+form.tab-form-demo .tab-pane {
+    margin: 20px 0px;
+}
