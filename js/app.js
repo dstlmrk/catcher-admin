@@ -22,44 +22,44 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
         })
         .when('/tournaments', {
             templateUrl : 'pages/tournaments.html',
-            // controller  : 'tournamentsController'
+            // controller  : 'tournamentsCtrl'
         })
         .when('/statistics', {
             templateUrl : 'pages/statistics.html',
-            // controller  : 'contactController'
+            // controller  : 'contactCtrl'
         })
         .when('/history', {
             templateUrl : 'pages/history.html',
-            controller  : 'historyController'
+            controller  : 'historyCtrl'
         })
         .when('/settings', {
             templateUrl : 'pages/settings.html',
-            // controller  : 'contactController'
+            // controller  : 'contactCtrl'
         })
         // route for the about page
         .when('/about', {
             templateUrl : 'pages/about.html',
-            controller  : 'aboutController'
+            controller  : 'aboutCtrl'
         })
         // tournament detail
         .when('/tournament/:id', {
             templateUrl : 'pages/tournament.html',
-            controller  : 'tournamentController'
+            controller  : 'tournamentCtrl'
         })
         // match detail
         .when('/match', {
             templateUrl : 'pages/match.html',
-            // controller  : 'aboutController'
+            // controller  : 'aboutCtrl'
         })
         // match detail
         .when('/admin', {
             templateUrl : 'pages/admin.html',
-            controller  : 'adminController'
+            controller  : 'adminCtrl'
         })
         // match detail
         .when('/new-tournament', {
             templateUrl : 'pages/new-tournament.html',
-            // controller  : 'aboutController'
+            // controller  : 'aboutCtrl'
         })
         .otherwise({redirectTo: '/'});
 }]);
@@ -76,8 +76,31 @@ catcher.factory('Divisions', function($resource) {
     return $resource('http://localhost:9999/api/divisions');
 });
 
+catcher.factory('Roles', function($resource) {
+    return $resource('http://localhost:9999/api/roles');
+});
+
 catcher.factory('Teams', function($resource) {
     return $resource('http://localhost:9999/api/teams');
+});
+
+catcher.factory('Users', function($resource) {
+    return $resource('http://localhost:9999/api/users');
+});
+
+catcher.factory('Login', function($resource) {
+    return $resource('http://localhost:9999/api/login');
+});
+
+catcher.factory('Registration', function($resource) {
+    return $resource('http://localhost:9999/api/registration');
+});
+
+
+catcher.factory('User', function($resource) {
+    return $resource('http://localhost:9999/api/user/:id', { id: '@_id' }, {
+        'update': { method:'PUT' }
+    });
 });
 
 catcher.factory('Team', function($resource) {

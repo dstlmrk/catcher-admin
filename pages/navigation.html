@@ -10,13 +10,14 @@
         <a class="navbar-brand" href="home"><i class="glyphicon glyphicon-send fa-fw"></i> Catcher Alpha</a>
     </div>
     <!-- /.navbar-header -->
-
+    <div ng-controller="navigationCtrl as $ctrl">
     <ul class="nav navbar-top-links navbar-right">
-        <li><a ng-hide="logged()" href="" data-toggle="modal" data-target="#loginModal">Přihlásit se</a></li>
-        <li><a ng-hide="logged()" href="" data-toggle="modal" data-target="#registrationModal">Registrace</a></li>
+        <li><a ng-hide="logged()" href="" ng-click="$ctrl.login()">Sign in</a></li>
+        <li><a ng-hide="logged()" href="" ng-click="$ctrl.register()">Register</a></li>
         <li><a ng-show="logged()" href=""><i class="glyphicon glyphicon-user fa-fw"></i> Karel Nováček</a></li>
         <li><a ng-show="logged()" ng-click="logout()" href="">Odhlásit se</a></li>
     </ul>
+    </div>
     <!-- /.navbar-top-links -->
 
 
@@ -100,7 +101,7 @@
 </div>
 
 <!-- Registration Modal -->
-<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -133,4 +134,72 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+
+
+<script type="text/ng-template" id="loginModal.html">
+  <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Login</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+
+  <div class="modal-body">
+             <!-- <fieldset> -->
+                <div class="form-group" show-errors>
+                   <label for="inputEmail" class="col-lg-3 control-label">Přihlašovací jméno</label>
+                   <div class="col-lg-9">
+                      <input type="text" class="form-control" name="login.email" placeholder="test" ng-model="login.email" required />
+                      <span ng-show="loginForm.login.email.$dirty && loginForm.login.email.$error.required" class="help-block">Email is required</span>
+                   </div>
+                </div>
+                <div class="form-group" show-errors>
+                   <label for="inputPassword" class="col-lg-3 control-label">Heslo</label>
+                   <div class="col-lg-9">
+                      <input type="password" class="form-control" name="login.password" placeholder="test" ng-model="login.password" required />
+                      <span ng-show="loginForm.login.password.$dirty && loginForm.login.password.$error.required" class="help-block">Password is required</span>
+                   </div>
+                </div>
+             <!-- </fieldset> -->
+           </div>
+</form>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="$ctrl.ok(login, email)">OK</button>
+      <button class="btn btn-default" ng-click="$ctrl.cancel()">Cancel</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="registerModal.html">
+  <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Register</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+
+  <p>Registration is so easy...</p>
+  <p>One login should be shared between your teammates...</p>
+  <p>If you want you can add more emails later for you account for reset password for example...</p>
+  <p>For now you can't add new team and manage it...</p>
+  <hr>
+      <form class="form-horizontal">
+  <fieldset>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Login</label>
+      <div class="col-lg-10">
+        <input class="form-control" ng-model=login>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+      <div class="col-lg-10">
+        <input class="form-control" type="email" ng-model=email>
+      </div>
+    </div>
+  </fieldset>
+</form>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="$ctrl.ok(login, email)">OK</button>
+      <button class="btn btn-default" ng-click="$ctrl.cancel()">Cancel</button>
+  </div>
+</script>
