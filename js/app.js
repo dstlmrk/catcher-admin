@@ -65,13 +65,25 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
 }]);
 
 // https://www.sitepoint.com/creating-crud-app-minutes-angulars-resource/
+// 'get':    {method:'GET'},
+// 'save':   {method:'POST'},
+// 'query':  {method:'GET', isArray:true},
+// 'remove': {method:'DELETE'},
+// 'delete': {method:'DELETE'} };
+
 // rest api resources
+catcher.factory('Divisions', function($resource) {
+    return $resource('http://localhost:9999/api/divisions');
+});
+
 catcher.factory('Teams', function($resource) {
     return $resource('http://localhost:9999/api/teams');
 });
 
 catcher.factory('Team', function($resource) {
-    return $resource('http://localhost:9999/api/team/:id');
+    return $resource('http://localhost:9999/api/team/:id', { id: '@_id' }, {
+        'update': { method:'PUT' }
+    });
 });
 
 catcher.factory('Tournaments', function($resource) {
@@ -117,155 +129,5 @@ angular.module('catcher').controller('TabsDemoCtrl', function ($scope, $window) 
 
   $scope.model = {
     name: 'Tabs'
-  };
-});
-
-catcher.controller('ModalDemoCtrl', function ($uibModal, $log, $document) {
-  var $ctrl = this;
-  $ctrl.items = ['item1', 'item2', 'item3', 'item4'];
-
-  $ctrl.animationsEnabled = true;
-
-  $ctrl.delete = function (team) {
-    console.log(team)
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      ariaLabelledBy: 'modal-title',
-      ariaDescribedBy: 'modal-body',
-      templateUrl: 'myModalContent2.html',
-      controller: 'DeleteTeamCtrl',
-      controllerAs: '$ctrl',
-      resolve: {
-        team: function () {
-          return team;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  $ctrl.open = function (data, size, parentSelector) {
-    console.log(data, size, parentSelector)
-    var parentElem = parentSelector ? 
-      angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      ariaLabelledBy: 'modal-title',
-      ariaDescribedBy: 'modal-body',
-      templateUrl: 'myModalContent.html',
-      controller: 'ModalInstanceCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      appendTo: parentElem,
-      resolve: {
-        data: function () {
-          return data;
-        },
-        items: function () {
-          return $ctrl.items;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  // $ctrl.openComponentModal = function () {
-  //   var modalInstance = $uibModal.open({
-  //     animation: $ctrl.animationsEnabled,
-  //     component: 'modalComponent',
-  //     resolve: {
-  //       items: function () {
-  //         return $ctrl.items;
-  //       }
-  //     }
-  //   });
-
-  //   modalInstance.result.then(function (selectedItem) {
-  //     $ctrl.selected = selectedItem;
-  //   }, function () {
-  //     $log.info('modal-component dismissed at: ' + new Date());
-  //   });
-  // };
-
-  // $ctrl.openMultipleModals = function () {
-  //   $uibModal.open({
-  //     animation: $ctrl.animationsEnabled,
-  //     ariaLabelledBy: 'modal-title-bottom',
-  //     ariaDescribedBy: 'modal-body-bottom',
-  //     templateUrl: 'stackedModal.html',
-  //     size: 'sm',
-  //     controller: function($scope) {
-  //       $scope.name = 'bottom';  
-  //     }
-  //   });
-
-  //   $uibModal.open({
-  //     animation: $ctrl.animationsEnabled,
-  //     ariaLabelledBy: 'modal-title-top',
-  //     ariaDescribedBy: 'modal-body-top',
-  //     templateUrl: 'stackedModal.html',
-  //     size: 'sm',
-  //     controller: function($scope) {
-  //       $scope.name = 'top';  
-  //     }
-  //   });
-  // };
-
-  // $ctrl.toggleAnimation = function () {
-  //   $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
-  // };
-});
-
-// Please note that $uibModalInstance represents a modal window (instance) dependency.
-// It is not the same as the $uibModal service used above.
-// https://angular-ui.github.io/bootstrap/ DOKUMENTACE
-catcher.controller('DeleteTeamCtrl', ['$uibModalInstance', '$route', 'Flash', 'team', 'Team',
-    function ($uibModalInstance, $route, Flash, team, Team) {
-  var $ctrl = this;
-  $ctrl.team = team;
-
-  $ctrl.ok = function () {
-    console.log('DELETE team', $ctrl.team.id)
-    // mazu tym s id z modal formulare
-    var response = Team.delete({id: $ctrl.team.id}, function(data){
-        Flash.create('success', 'Tým byl úspěšně smazán');
-        $route.reload();
-    }, function(error) {
-          Flash.create('danger', 'Požadavek byl zpracován s chybou');
-    });
-    // modal zaviram
-    $uibModalInstance.close();
-  };
-
-  $ctrl.cancel = function () {
-    $uibModalInstance.close();
-
-  };
-}]);
-
-catcher.controller('ModalInstanceCtrl', function ($uibModalInstance, data, items) {
-  var $ctrl = this;
-  $ctrl.data = data;
-  $ctrl.items = items;
-  $ctrl.selected = {
-    item: $ctrl.items[0]
-  };
-
-  $ctrl.ok = function () {
-    $uibModalInstance.close($ctrl.selected.item);
-  };
-
-  $ctrl.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
   };
 });
