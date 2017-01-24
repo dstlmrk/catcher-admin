@@ -1,31 +1,46 @@
 // create the controller and inject Angular's $scope
-catcher.controller('mainController', ['$scope', 'Flash',
-    function($scope, Flash) {
+catcher.controller('mainController', ['$scope', '$location', 'Flash',
+    function($scope, $location, Flash) {
         // create a message to display in our view
         $scope.test = 'OK';
 
-        var logged = false
+        console.log(localStorage.getItem("api_key"))
 
-        // $scope.loginForm = {}
+        // TODO: na main page po prihlaseni dat jmeno uzivatele
+        // $scope.user = localStorage.getItem("");
 
         // TODO: zatim budu do hlavicek vkladat rucne api_key a az pozdeji udelam role a pristupy
-        $scope.login = function(data) {
-            if ($scope.login.email === "test" && $scope.login.password === "test") {
-                logged = true
-                Flash.create('success', 'Úspěšně přihlášen');
-            } else {
-                Flash.create('danger', 'Chybné přihlašovací údaje');
-            }
+        $scope.login = function() {
+
+            // $scope.user = localStorage.getItem("login");
+
+
+            // if ($scope.login.email === "test" && $scope.login.password === "test") {
+            //     logged = true
+            //     Flash.create('success', 'Úspěšně přihlášen');
+            // } else {
+            //     Flash.create('danger', 'Chybné přihlašovací údaje');
+            // }
         }
 
         $scope.logout = function(data) {
-            logged = false
+            localStorage.clear();
+            $location.path('/');
             Flash.create('success', 'Úspěšně odhlášen');
         }
 
         $scope.logged = function() {
-            return logged
+            return Boolean(localStorage.getItem("api_key"))
         }
+
+        $scope.getLogin = function() {
+            return localStorage.getItem("login")
+        }
+
+        $scope.getRole = function() {
+            return localStorage.getItem("role")
+        }
+
 
         // TODO: udelat login:
         // https://github.com/veselj43/
@@ -46,13 +61,9 @@ catcher.controller('statisticsCtrl', function($scope) {
     $scope.message = 'Contact us! JK. This is just a demo.';
 });
 
-catcher.controller('settingsCtrl', function($scope) {
-    $scope.message = 'Contact us! JK. This is just a demo.';
-});
+catcher.controller('settingsCtrl', function($scope) {});
 
-catcher.controller('aboutCtrl', function($scope) {
-    $scope.message = 'Contact us! JK. This is just a demo.';
-});
+catcher.controller('aboutCtrl', function($scope) {});
 
 
 
@@ -93,7 +104,7 @@ catcher.controller('registerModalCtrl', ['$uibModalInstance', '$route', 'Flash',
                 "email": email
             }, function(data) {
                 Flash.create('success', 'Na uvedený email byla odeslána zpráva.', 0);
-                // neni potreba ty vypada
+                // neni potreba to vypada
                 // $route.reload();
             }, function(error) {
                 Flash.create(
@@ -110,23 +121,34 @@ catcher.controller('registerModalCtrl', ['$uibModalInstance', '$route', 'Flash',
     }
 ]);
 
-catcher.controller('loginModalCtrl', ['$uibModalInstance', '$route', 'Flash', 'Login',
-    function($uibModalInstance, $route, Flash, Login) {
+catcher.controller('loginModalCtrl', ['$uibModalInstance', '$scope', '$route', 'Flash', 'Login',
+    function($uibModalInstance, $scope, $route, Flash, Login) {
         var $ctrl = this;
         $ctrl.ok = function(login, password) {
+            console.log('LOGIN', login, password)
             if (!login || !password) {
                 return;
             }
+
             Login.save({
                 "login": login,
                 "password": password
             }, function(data) {
+                console.log(data)
+                localStorage.setItem("api_key", data.api_key);
+                localStorage.setItem("role", data.user.role.type);
+                localStorage.setItem("login", data.user.login);
+                $scope.user = data.user.login;
+                // document.getElementById(elementId: DOMString)
                 Flash.create('success', 'Přihlášení proběhlo úspěšně');
                 $route.reload();
             }, function(error) {
-                Flash.create(
-                    'danger', 'Požadavek byl zpracován s chybou (' + error.status + '): ' + error.statusText
-                )
+                if (error.status != 401) {
+                    console.log(error)
+                    Flash.create(
+                        'danger', 'Požadavek byl zpracován s chybou (' + error.status + '): ' + error.statusText
+                    )
+                }   
             });
             // modal zaviram
             $uibModalInstance.close();

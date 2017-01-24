@@ -2,3 +2,25 @@
 form.tab-form-demo .tab-pane {
     margin: 20px 0px;
 }
+
+#flash-message {
+    padding-top: 15px;
+    /*padding-bottom: 0px;*/
+    /* puvodne bylo margin-bottom: -20px; kvuli titulku */
+    margin-bottom: 0px;
+}
+
+#page-wrapper-alert {
+    padding: 0 15px;
+    min-height: 10px;
+    background-color: #fff;
+}
+
+@media(min-width:768px) {
+    #page-wrapper-alert {
+        position: inherit;
+        margin: 0 0 0 250px;
+        padding: 0 30px;
+        border-left: 1px solid #e7e7e7;
+    }
+}

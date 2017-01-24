@@ -1,172 +1,91 @@
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="home"><i class="glyphicon glyphicon-send fa-fw"></i> Catcher Alpha</a>
-    </div>
-    <!-- /.navbar-header -->
-    <div ng-controller="navigationCtrl as $ctrl">
-    <ul class="nav navbar-top-links navbar-right">
-        <li><a ng-hide="logged()" href="" ng-click="$ctrl.login()">Sign in</a></li>
-        <li><a ng-hide="logged()" href="" ng-click="$ctrl.register()">Register</a></li>
-        <li><a ng-show="logged()" href=""><i class="glyphicon glyphicon-user fa-fw"></i> Karel Nováček</a></li>
-        <li><a ng-show="logged()" ng-click="logout()" href="">Odhlásit se</a></li>
-    </ul>
-    </div>
-    <!-- /.navbar-top-links -->
-
-
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                    </div>
-                    <!-- /input-group -->
-                </li>
-                <li>
-                    <a href="home"><i class="glyphicon glyphicon-home fa-fw"></i> Úvodní strana</a>
-                </li>
-                <li>
-                    <a href="tournaments"><i class="fa fa-sitemap fa-fw"></i> Moje turnaje</a>
-                </li>
-                <li>
-                    <a href="statistics"><i class="glyphicon glyphicon-stats fa-fw"></i> Statistiky</a>
-                </li>
-                <li>
-                    <a href="history"><i class="glyphicon glyphicon-book fa-fw"></i> Historie</a>
-                </li>
-                <li>
-                    <a href="settings"><i class="glyphicon glyphicon-cog fa-fw"></i> Nastavení</a>
-                </li>
-                <li>
-                    <a href="about"><i class="glyphicon glyphicon-info-sign fa-fw"></i> O aplikaci</a>
-                </li>
-                <li>
-                    <a href="admin"><i class="glyphicon glyphicon-pencil fa-fw"></i> Admin</a>
-                </li>
-                <small>. Ctrl + Shift + R = hard reload</small>
-            </ul>
-        </div>
-        <!-- /.sidebar-collapse -->
-    </div>
-    <!-- /.navbar-static-side -->
-</nav>
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Login</h4>
-         </div>
-         <form class="form-horizontal" name="loginForm" novalidate>
-           <div class="modal-body">
-             <!-- <fieldset> -->
-                <div class="form-group" show-errors>
-                   <label for="inputEmail" class="col-lg-3 control-label">Přihlašovací jméno</label>
-                   <div class="col-lg-9">
-                      <input type="text" class="form-control" name="login.email" placeholder="test" ng-model="login.email" required />
-                      <span ng-show="loginForm.login.email.$dirty && loginForm.login.email.$error.required" class="help-block">Email is required</span>
-                   </div>
-                </div>
-                <div class="form-group" show-errors>
-                   <label for="inputPassword" class="col-lg-3 control-label">Heslo</label>
-                   <div class="col-lg-9">
-                      <input type="password" class="form-control" name="login.password" placeholder="test" ng-model="login.password" required />
-                      <span ng-show="loginForm.login.password.$dirty && loginForm.login.password.$error.required" class="help-block">Password is required</span>
-                   </div>
-                </div>
-             <!-- </fieldset> -->
-           </div>
-           <div class="modal-footer">
-              <button type="button" class="btn btn-default" disabled="">Obnovit heslo</button>
-              <button ng-disabled="loginForm.$invalid || dataLoading" type="submit" class="btn btn-primary" ng-click="login()" data-dismiss="modal">Přihlásit se</button>
-           </div>
-         </form>
-      </div>
-   </div>
-</div>
-
-<!-- Registration Modal -->
-<!-- <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Registrace</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal">
-  <fieldset>
-    <div class="form-group">
-      <label for="inputFirstname" class="col-lg-3 control-label">Přihlašovací jméno</label>
-      <div class="col-lg-9">
-        <input type="text" class="form-control" id="inputFirstname" placeholder="zluta-zimnice">
-        <span class="help-block">Bude sloužit vašemu týmu pro přihlašování.</span>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-3 control-label">Email</label>
-      <div class="col-lg-9">
-        <input type="text" class="form-control" id="inputEmail" placeholder="">
-        <span class="help-block">Na emailovou adresu vám pošleme potvrzení o registraci. Přihlášení je možné až po potvrzení.</span>
-      </div>
-    </div>
-  </fieldset>
-</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
-        <button type="button" class="btn btn-primary">Registrace</button>
-      </div>
-    </div>
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="home"><i class="glyphicon glyphicon-send fa-fw"></i> Catcher Alpha</a>
   </div>
-</div> -->
-
-
-
+  <!-- /.navbar-header -->
+  <div ng-controller="navigationCtrl as $ctrl">
+    <ul class="nav navbar-top-links navbar-right">
+      <li><a ng-hide="logged()" href="" ng-click="$ctrl.register()">Register</a></li>
+      <li><a ng-hide="logged()" href="" ng-click="$ctrl.login()">Sign in</a></li>
+      <li ng-show="logged()" ><i class="glyphicon glyphicon-user fa-fw"></i> <b>{{getLogin()}}</b> ({{getRole()}})</li>
+      <li><a ng-show="logged()" ng-click="logout()" href="">Odhlásit se</a></li>
+    </ul>
+  </div>
+  <!-- /.navbar-top-links -->
+  <div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+      <ul class="nav" id="side-menu">
+        <!-- <li class="sidebar-search">
+          <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+            <i class="fa fa-search"></i>
+            </button>
+            </span>
+          </div>
+        </li> -->
+        <li>
+          <a href="home"><i class="glyphicon glyphicon-home fa-fw"></i> Home</a>
+        </li>
+        <li>
+          <a href="tournaments" ng-show="logged()"><i class="fa fa-sitemap fa-fw"></i> My tournaments</a>
+        </li>
+        <!-- <li>
+          <a href="statistics"><i class="glyphicon glyphicon-stats fa-fw"></i> Statistiky</a>
+        </li> -->
+        <li>
+          <a href="history"><i class="glyphicon glyphicon-book fa-fw"></i> History</a>
+        </li>
+        <li>
+          <a href="settings" ng-show="logged()"><i class="glyphicon glyphicon-cog fa-fw"></i> Settings</a>
+        </li>
+        <!-- <li>
+          <a href="about"><i class="glyphicon glyphicon-info-sign fa-fw"></i> About</a>
+        </li> -->
+        <li>
+          <a href="admin" ng-show="getRole()=='admin'"><i class="glyphicon glyphicon-pencil fa-fw"></i> Admin</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+  </div>
+  <!-- /.navbar-static-side -->
+</nav>
 <script type="text/ng-template" id="loginModal.html">
   <div class="modal-header">
       <h3 class="modal-title" id="modal-title">Login</h3>
   </div>
   <div class="modal-body" id="modal-body">
-
-  <div class="modal-body">
-             <!-- <fieldset> -->
-                <div class="form-group" show-errors>
-                   <label for="inputEmail" class="col-lg-3 control-label">Přihlašovací jméno</label>
-                   <div class="col-lg-9">
-                      <input type="text" class="form-control" name="login.email" placeholder="test" ng-model="login.email" required />
-                      <span ng-show="loginForm.login.email.$dirty && loginForm.login.email.$error.required" class="help-block">Email is required</span>
-                   </div>
-                </div>
-                <div class="form-group" show-errors>
-                   <label for="inputPassword" class="col-lg-3 control-label">Heslo</label>
-                   <div class="col-lg-9">
-                      <input type="password" class="form-control" name="login.password" placeholder="test" ng-model="login.password" required />
-                      <span ng-show="loginForm.login.password.$dirty && loginForm.login.password.$error.required" class="help-block">Password is required</span>
-                   </div>
-                </div>
-             <!-- </fieldset> -->
-           </div>
-</form>
+  {{$ctrl.info}}
+  <div class="form-group">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input placeholder="login" class="form-control" ng-model="login">
+  </div>
+  </div>
+  
+  <div class="form-group">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+    <input type="password" placeholder="password" class="form-control" ng-model="password">
+  </div>
+  <div class="pull-right">
+      <small><del><a href="">Forgot your password?</a></del></small>
+        </div>
+  </div>
+  </div>
   </div>
   <div class="modal-footer">
-      <button class="btn btn-primary" ng-click="$ctrl.ok(login, email)">OK</button>
       <button class="btn btn-default" ng-click="$ctrl.cancel()">Cancel</button>
+      <button class="btn btn-primary" ng-click="$ctrl.ok(login, password)">Sign in</button>
   </div>
 </script>
 
@@ -175,31 +94,29 @@
       <h3 class="modal-title" id="modal-title">Register</h3>
   </div>
   <div class="modal-body" id="modal-body">
-
+  
   <p>Registration is so easy...</p>
   <p>One login should be shared between your teammates...</p>
   <p>If you want you can add more emails later for you account for reset password for example...</p>
   <p>For now you can't add new team and manage it...</p>
+  <p>Initial password will be send in your email. Change this password immediately.</p>
   <hr>
-      <form class="form-horizontal">
-  <fieldset>
-    <div class="form-group">
-      <label class="col-lg-2 control-label">Login</label>
-      <div class="col-lg-10">
-        <input class="form-control" ng-model=login>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-      <div class="col-lg-10">
-        <input class="form-control" type="email" ng-model=email>
-      </div>
-    </div>
-  </fieldset>
-</form>
+  <div class="form-group">
+  <div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input placeholder="login (at least 6 characters)" class="form-control" ng-model=login>
+  </div>
+  </div>
+  
+  <div class="form-group">
+  <div class="input-group">
+    <span class="input-group-addon">@</span>
+    <input type="email" placeholder="email" class="form-control" ng-model=email>
+  </div>
+  </div>
   </div>
   <div class="modal-footer">
-      <button class="btn btn-primary" ng-click="$ctrl.ok(login, email)">OK</button>
       <button class="btn btn-default" ng-click="$ctrl.cancel()">Cancel</button>
+      <button class="btn btn-primary" ng-click="$ctrl.ok(login, email)">Register</button>
   </div>
 </script>

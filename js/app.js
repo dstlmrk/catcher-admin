@@ -4,8 +4,46 @@ var catcher = angular.module('catcher', [
     'ngAnimate', 'ngSanitize', 'ngRoute', 'ui.bootstrap', 'ngFlash', 'ngResource'
 ]);
 
+
+// catcher.config(['$httpProvider', function($httpProvider){
+//   $httpProvider.responseInterceptors.push('error401');
+//   $httpProvider.responseInterceptors.push('error4xx');
+// }]);
+
 // configure our routes
-catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+catcher.config(['$routeProvider', '$locationProvider', '$provide', '$httpProvider',
+    function($routeProvider, $locationProvider, $provide, $httpProvider) {
+    
+    // slouzi k tomu, aby se pri responsich s kodem 401 page presmerovala
+    // na homapage a smazata api_key z local storage
+    $provide.factory('unauthorisedInterceptor', ['$q', '$location', 'Flash', function ($q, $location, Flash) {
+        return {
+            'responseError': function (rejection) {
+                console.log(rejection);
+
+                if (rejection.status === 401) {
+                    if (rejection.data && rejection['data']['title'] == 'Authentication Failed') {
+                        Flash.create(
+                            'danger',
+                            '<b>You aren\'t logged!</b> Login or password is wrong.'
+                        );
+                    } else {
+                        // pokud bych chtel pomoci Flash vyhazovat nejake zpravy o tom, ze uzivatel
+                        // byl odhlasen, bylo by nutne volat nize uvedenou funkci (angular ale hlasi
+                        // nejakou divnou chybi v konzoli, tak jsem to nechal na puvodnim presmerovani)
+                        // $location.path('/');
+                        window.location.href = '/';
+                        localStorage.clear()
+                    }
+                }
+
+                return $q.reject(rejection);
+            }
+        };
+    }]);
+
+    $httpProvider.interceptors.push('unauthorisedInterceptor');
+
     // use the HTML5 History API
     $locationProvider.html5Mode(true);
     $routeProvider
@@ -71,6 +109,12 @@ catcher.config(['$routeProvider', '$locationProvider', function($routeProvider, 
 // 'remove': {method:'DELETE'},
 // 'delete': {method:'DELETE'} };
 
+// TODO:
+// posilani authorization v hlavicce:
+// get: {
+//         method: 'GET',
+//         headers: { 'something': 'anything' }
+//     }
 // rest api resources
 catcher.factory('Divisions', function($resource) {
     return $resource('http://localhost:9999/api/divisions');
@@ -81,7 +125,9 @@ catcher.factory('Roles', function($resource) {
 });
 
 catcher.factory('Teams', function($resource) {
-    return $resource('http://localhost:9999/api/teams');
+    return $resource('http://localhost:9999/api/teams', {}, {
+    'save': {method: 'POST', headers: {'Authorization': localStorage.getItem("api_key")}}
+    });
 });
 
 catcher.factory('Users', function($resource) {
@@ -96,16 +142,17 @@ catcher.factory('Registration', function($resource) {
     return $resource('http://localhost:9999/api/registration');
 });
 
-
 catcher.factory('User', function($resource) {
     return $resource('http://localhost:9999/api/user/:id', { id: '@_id' }, {
-        'update': { method:'PUT' }
+        'update': {method: 'PUT', headers: {'Authorization': localStorage.getItem("api_key")}},
+        'delete': {method: 'DELETE', headers: {'Authorization': localStorage.getItem("api_key")}}
     });
 });
 
 catcher.factory('Team', function($resource) {
     return $resource('http://localhost:9999/api/team/:id', { id: '@_id' }, {
-        'update': { method:'PUT' }
+        'update': {method: 'PUT', headers: {'Authorization': localStorage.getItem("api_key")}},
+        'delete': {method: 'DELETE', headers: {'Authorization': localStorage.getItem("api_key")}}
     });
 });
 
