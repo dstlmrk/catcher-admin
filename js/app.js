@@ -131,7 +131,9 @@ catcher.factory('Teams', function($resource) {
 });
 
 catcher.factory('Users', function($resource) {
-    return $resource('http://catcher.zlutazimnice.cz/api/users');
+    return $resource('http://catcher.zlutazimnice.cz/api/users', {}, {
+    'save': {method: 'POST', headers: {'Authorization': localStorage.getItem("api_key")}}
+    });
 });
 
 catcher.factory('Login', function($resource) {
