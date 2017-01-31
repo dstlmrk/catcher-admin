@@ -209,10 +209,10 @@ catcher.controller('addUserAdminCtrl', ['$uibModalInstance', '$route', 'Flash', 
         $ctrl.ok = function() {
             console.log($ctrl._user)
             // TODO: tady by mela byt nejaka ochrana, aby uzivatel nemohl odeslat neuplny formular
-            if (!$ctrl._user.login || !$ctrl._user.email || !$ctrl._user.role_id) {
+            if (!$ctrl._user.login || !$ctrl._user.password || !$ctrl._user.email || !$ctrl._user.role_id) {
                 return;
             }
-            Users.save({"login": $ctrl._user.login, "email": $ctrl._user.email, "role_id": $ctrl._user.role_id}, function(data) {
+            Users.save({"login": $ctrl._user.login, "password": $ctrl._user.password, "email": $ctrl._user.email, "role_id": $ctrl._user.role_id}, function(data) {
                 Flash.create('success', 'User is added successfully');
                 $route.reload();
             }, function(error) {
