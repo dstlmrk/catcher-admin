@@ -117,40 +117,40 @@ catcher.config(['$routeProvider', '$locationProvider', '$provide', '$httpProvide
 //     }
 // rest api resources
 catcher.factory('Divisions', function($resource) {
-    return $resource('http://localhost:9999/api/divisions');
+    return $resource('http://catcher.zlutazimnice.cz/api/divisions');
 });
 
 catcher.factory('Roles', function($resource) {
-    return $resource('http://localhost:9999/api/roles');
+    return $resource('http://catcher.zlutazimnice.cz/api/roles');
 });
 
 catcher.factory('Teams', function($resource) {
-    return $resource('http://localhost:9999/api/teams', {}, {
+    return $resource('http://catcher.zlutazimnice.cz/api/teams', {}, {
     'save': {method: 'POST', headers: {'Authorization': localStorage.getItem("api_key")}}
     });
 });
 
 catcher.factory('Users', function($resource) {
-    return $resource('http://localhost:9999/api/users');
+    return $resource('http://catcher.zlutazimnice.cz/api/users');
 });
 
 catcher.factory('Login', function($resource) {
-    return $resource('http://localhost:9999/api/login');
+    return $resource('http://catcher.zlutazimnice.cz/api/login');
 });
 
 catcher.factory('Registration', function($resource) {
-    return $resource('http://localhost:9999/api/registration');
+    return $resource('http://catcher.zlutazimnice.cz/api/registration');
 });
 
 catcher.factory('User', function($resource) {
-    return $resource('http://localhost:9999/api/user/:id', { id: '@_id' }, {
+    return $resource('http://catcher.zlutazimnice.cz/api/user/:id', { id: '@_id' }, {
         'update': {method: 'PUT', headers: {'Authorization': localStorage.getItem("api_key")}},
         'delete': {method: 'DELETE', headers: {'Authorization': localStorage.getItem("api_key")}}
     });
 });
 
 catcher.factory('Team', function($resource) {
-    return $resource('http://localhost:9999/api/team/:id', { id: '@_id' }, {
+    return $resource('http://catcher.zlutazimnice.cz/api/team/:id', { id: '@_id' }, {
         'update': {method: 'PUT', headers: {'Authorization': localStorage.getItem("api_key")}},
         'delete': {method: 'DELETE', headers: {'Authorization': localStorage.getItem("api_key")}}
     });
