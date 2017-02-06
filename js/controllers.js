@@ -4,7 +4,7 @@ catcher.controller('mainController', ['$scope', '$location', 'Flash',
         // create a message to display in our view
         $scope.test = 'OK';
 
-        console.log(localStorage.getItem("api_key"))
+        // console.log(localStorage.getItem("api_key"))
 
         // TODO: na main page po prihlaseni dat jmeno uzivatele
         // $scope.user = localStorage.getItem("");
@@ -65,6 +65,38 @@ catcher.controller('settingsCtrl', function($scope) {});
 
 catcher.controller('aboutCtrl', function($scope) {});
 
+catcher.controller('addMatchesCtrl', ['$scope', 'Flash',
+    function($scope, Flash) {
+        $scope.aha = "xxx"
+    }
+]);
+
+catcher.controller('addGroupCtrl', ['$scope', 'Flash',
+    function($scope, Flash) {
+
+        $scope.teams = {}
+        $scope.placements = {}
+
+        // fake, vraci kolekci cisel
+        $scope.getNumberArray = function(num) {
+            return new Array(num);   
+        }
+
+        $scope.submit = function(group, teams, placements) {
+            console.log('submit', group, teams, placements)
+            // $scope.master = angular.copy(user);
+        };
+
+    }
+]);
+
+catcher.controller('editTeamsCtrl', ['$scope', 'Flash', 'Teams',
+    function($scope, Flash, Teams) {
+        Teams.get(function(data) {
+            $scope.teams = data.teams
+        });
+    }
+]);
 
 
 // NAVIGATION ##############################################################################

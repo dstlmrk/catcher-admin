@@ -95,9 +95,24 @@ catcher.config(['$routeProvider', '$locationProvider', '$provide', '$httpProvide
             controller  : 'adminCtrl'
         })
         // match detail
-        .when('/new-tournament', {
-            templateUrl : 'pages/new-tournament.html',
+        .when('/add-tournament', {
+            templateUrl : 'pages/add-tournament.html',
             // controller  : 'aboutCtrl'
+        })
+        // match detail
+        .when('/add-matches', {
+            templateUrl : 'pages/add-matches.html',
+            controller  : 'addMatchesCtrl'
+        })
+        // add group
+        .when('/add-group', {
+            templateUrl : 'pages/add-group.html',
+            controller  : 'addGroupCtrl'
+        })
+        // edit teams at the tournament
+        .when('/edit-teams', {
+            templateUrl : 'pages/edit-teams.html',
+            controller  : 'editTeamsCtrl'
         })
         .otherwise({redirectTo: '/'});
 }]);
