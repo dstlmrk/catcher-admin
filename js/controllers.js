@@ -41,6 +41,11 @@ catcher.controller('mainController', ['$scope', '$location', 'Flash',
             return localStorage.getItem("role")
         }
 
+        // fake, vraci kolekci cisel
+        $scope.getNumberArray = function(num) {
+            return new Array(num);   
+        }
+
 
         // TODO: udelat login:
         // https://github.com/veselj43/
@@ -77,10 +82,10 @@ catcher.controller('addGroupCtrl', ['$scope', 'Flash',
         $scope.teams = {}
         $scope.placements = {}
 
-        // fake, vraci kolekci cisel
-        $scope.getNumberArray = function(num) {
-            return new Array(num);   
-        }
+        // // fake, vraci kolekci cisel
+        // $scope.getNumberArray = function(num) {
+        //     return new Array(num);   
+        // }
 
         $scope.submit = function(group, teams, placements) {
             console.log('submit', group, teams, placements)
@@ -90,11 +95,95 @@ catcher.controller('addGroupCtrl', ['$scope', 'Flash',
     }
 ]);
 
-catcher.controller('editTeamsCtrl', ['$scope', 'Flash', 'Teams',
+catcher.controller('addTournamentCtrl', ['$scope', 'Flash',
+    function($scope, Flash) {
+
+        // debug
+        $scope.divisions = [
+            {id: 1, type: 'open'},
+            {id: 2, type: 'women'}
+        ]
+
+        // $scope.tournament = {
+        //     name: 'Prague Winter',
+        //     start_date: '2016'
+        // }
+
+        // it is necessary for radio input
+        $scope.tournament = {
+            country: 'CZE'
+        }
+        $scope.fields = []
+
+        
+        $scope.submit = function(tournament, fields) {
+            console.log('submit', tournament, fields)
+        };
+
+    }
+]);
+
+catcher.controller('tournamentSettingsCtrl', ['$scope', 'Flash', 'Teams',
     function($scope, Flash, Teams) {
+
+        // debug
+        $scope.divisions = [
+            {id: 1, type: 'open'},
+            {id: 2, type: 'women'}
+        ]
+
+        // it is necessary for radio input
+        $scope.tournament = {
+            country: 'CZE'
+        }
+
         Teams.get(function(data) {
             $scope.teams = data.teams
         });
+
+        // Teams.get(function(data) {
+        //     $scope.teams = data.teams
+        // });
+    }
+]);
+
+catcher.controller('tournamentGroupsCtrl', ['$scope', 'Flash',
+    function($scope, Flash) {
+
+        $scope.teams = {}
+        $scope.placements = {}
+
+        // // fake, vraci kolekci cisel
+        // $scope.getNumberArray = function(num) {
+        //     return new Array(num);   
+        // }
+
+        $scope.submit = function(group, teams, placements) {
+            console.log('submit', group, teams, placements)
+            // $scope.master = angular.copy(user);
+        };
+
+    }
+]);
+
+
+catcher.controller('tournamentMatchesCtrl', ['$scope', 'Flash',
+    function($scope, Flash) {
+
+        console.log('xxx')
+        $scope.teams = {}
+        $scope.placements = {}
+
+        // // fake, vraci kolekci cisel
+        // $scope.getNumberArray = function(num) {
+        //     return new Array(num);   
+        // }
+
+        $scope.submit = function(group, teams, placements) {
+            console.log('submit', group, teams, placements)
+            // $scope.master = angular.copy(user);
+        };
+
     }
 ]);
 

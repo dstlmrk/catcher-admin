@@ -97,17 +97,32 @@ catcher.config(['$routeProvider', '$locationProvider', '$provide', '$httpProvide
         // match detail
         .when('/add-tournament', {
             templateUrl : 'pages/add-tournament.html',
-            // controller  : 'aboutCtrl'
+            controller  : 'addTournamentCtrl'
         })
-        // match detail
-        .when('/add-matches', {
-            templateUrl : 'pages/add-matches.html',
-            controller  : 'addMatchesCtrl'
-        })
+        // // match detail
+        // .when('/add-matches', {
+        //     templateUrl : 'pages/add-matches.html',
+        //     controller  : 'addMatchesCtrl'
+        // })
         // add group
         .when('/add-group', {
             templateUrl : 'pages/add-group.html',
             controller  : 'addGroupCtrl'
+        })
+        // edit teams at the tournament
+        .when('/tournament-settings', {
+            templateUrl : 'pages/tournament-settings.html',
+            controller  : 'tournamentSettingsCtrl'
+        })
+        //
+        .when('/tournament-matches', {
+            templateUrl : 'pages/tournament-matches.html',
+            controller  : 'tournamentMatchesCtrl'
+        })
+        //
+        .when('/tournament-groups', {
+            templateUrl : 'pages/tournament-groups.html',
+            controller  : 'tournamentGroupsCtrl'
         })
         // edit teams at the tournament
         .when('/edit-teams', {
@@ -115,6 +130,8 @@ catcher.config(['$routeProvider', '$locationProvider', '$provide', '$httpProvide
             controller  : 'editTeamsCtrl'
         })
         .otherwise({redirectTo: '/'});
+
+
 }]);
 
 // https://www.sitepoint.com/creating-crud-app-minutes-angulars-resource/
