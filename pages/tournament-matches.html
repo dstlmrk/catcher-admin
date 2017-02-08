@@ -1,21 +1,20 @@
 <div id="page-wrapper">
   <ul class="breadcrumb">
     <li><a href="#">My tournaments</a></li>
-    <li><a href="#">HMČR Brno 2017</a></li>
+    <li><a href="tournament/1">Prague Winter</a></li>
     <li class="active">Matches</li>
   </ul>
   <!-- TODO: required neni mozne dat k tem inputum, ktere se zobrazuji dynamicky (aspon ne jednoduse) -->
+  <!-- TODO: radio rvou, ze nejsou vyplneny, podle me se musi vytvorit ta ng-model promena v controleru -->
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-default">
         <div class="panel-heading">Prearranged sets of matches</div>
         <div class="panel-body">
           <div class="btn-group btn-group">
-            <a href="#" class="btn btn-default">Playoff for 4 teams</a>
-            <a href="#" class="btn btn-default">Playoff for 8 teams</a>
-            <a href="#" class="btn btn-default">Matches for group A</a>
-            <a href="#" class="btn btn-default">Matches for group B</a>
-            <a href="#" class="btn btn-default">Matches for group C</a>
+            <a href="#" class="btn btn-default" disabled>Playoff for 4 teams</a>
+            <a href="#" class="btn btn-default" disabled>Playoff for 8 teams</a>
+            <a href="#" class="btn btn-default" disabled>Matches for groups</a>
           </div>
         </div>
       </div>
@@ -24,66 +23,211 @@
           <i class="glyphicon glyphicon-plus"></i> New match
         </div>
         <div class="panel-body">
-          <form class="form-horizontal" name="newTournament">
+          <div ng-show="match.nextStep == 'playoff'">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="match description (quaterfinals etc.)" ng-model="match.description">
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <b>Winner</b>
+                <label for="nextStep">will be continue&nbsp;</label>
+                <input id="nextStep" type="radio" ng-model="match.nextStepTypeWinner" value="nextStep">
+                &nbsp;
+                <label for="finalPlace">ends at the final place&nbsp;</label>
+                <input id="finalPlace" type="radio" ng-model="match.nextStepTypeWinner"" value="finalPlace">
+                &nbsp;
+                <div class="form-group" ng-show="match.nextStepTypeWinner == 'nextStep'">
+                  <select class="form-control" ng-model="match.nextStepWinner">
+                    <option>finals</option>
+                    <option>3rd</option>
+                  </select>
+                </div>
+                <div class="form-group" ng-show="match.nextStepTypeWinner == 'finalPlace'">
+                  <input type="number" min="1" class="form-control" ng-model="match.finalPlaceWinner">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <b>Looser</b>
+                <label for="nextStep">will be continue&nbsp;</label>
+                <input id="nextStep" type="radio" ng-model="match.nextStepTypeLooser" value="nextStep">
+                &nbsp;
+                <label for="finalPlace">ends at the final place&nbsp;</label>
+                <input id="finalPlace" type="radio" ng-model="match.nextStepTypeLooser" value="finalPlace">
+                &nbsp;
+                <div class="form-group" ng-show="match.nextStepTypeLooser == 'nextStep'">
+                  <select class="form-control" ng-model="match.nextStepLooser">
+                    <option>finals</option>
+                    <option>3rd</option>
+                  </select>
+                </div>
+                <div class="form-group" ng-show="match.nextStepTypeLooser == 'finalPlace'">
+                  <input type="number" min="1" class="form-control" ng-model="match.finalPlaceLooser">
+                </div>
+              </div>
+            </div>
+          </div>
+          <form class="form-horizontal" name="newMatch">
             <fieldset>
               <div class="form-group">
-                <label class="col-lg-2 control-label">Name of the group</label>
+                <label class="col-lg-2 control-label">Date</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control" placeholder="group A" ng-model="group.name" required>
+                  <input type="date" class="form-control" ng-model="match.date" required>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-lg-2 control-label">Number of teams</label>
+                <label class="col-lg-2 control-label">Start time</label>
                 <div class="col-lg-10">
-                  <input type="number" min="1" max="64" class="form-control" ng-model="group.teamsCount" required>
+                  <input type="time" min="1" max="64" class="form-control" ng-model="match.timeStart" required>
                 </div>
               </div>
-              <hr>
-              <div class="form-group" ng-repeat="i in getNumberArray(group.teamsCount) track by $index">
-                <label class="col-lg-2 control-label">Team no. {{$index+1}}</label>
+              <div class="form-group">
+                <label class="col-lg-2 control-label">End time</label>
                 <div class="col-lg-10">
-                  <input type="number" min="1" class="form-control" placeholder="team's seed" ng-model="teams[$index+1]" required>
+                  <input type="time" min="1" max="64" class="form-control" ng-model="match.timeEnd" required>
                 </div>
               </div>
-              <hr>
-              <div class="row" ng-repeat="i in getNumberArray(group.teamsCount) track by $index">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="col-lg-4 control-label">{{$index+1}}. team by placement</label>
-                    <div class="col-lg-8">
-                      <!-- <div ng-repeat="division in divisions"> -->
-                      <div class="radio">
-                        <label>
-                        <input id="nextStep" type="radio" ng-model="placements[$index+1].nextStepType" value="nextStep" required>
-                        will be continue
-                        </label>
-                      </div>
-                      <div class="radio">
-                        <label>
-                        <input id="finalPlace" type="radio" ng-model="placements[$index+1].nextStepType" value="finalPlace" required>
-                        ends at the final place
-                        </label>
-                      </div>
-                      <!-- </div> -->
+              <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Field</label>
+                <div class="col-lg-10">
+                  <select class="form-control" ng-model="match.field" required>
+                    <option>main field</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-2 control-label">Match</label>
+                <div class="col-lg-8">
+                  <div class="radio">
+                    <label>
+                    <input type="radio" ng-model="match.nextStepType" value="groupMatch" required>
+                    in the group
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                    <input type="radio" ng-model="match.nextStepType" value="playoff" required>
+                    playoff
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div ng-show="match.nextStepType == 'groupMatch'">
+                <hr>
+                <div class="form-group">
+                  <label for="select" class="col-lg-2 control-label">Home team (by seed)</label>
+                  <div class="col-lg-10">
+                    <input type="number" min="1" class="form-control" ng-model="match.homeTeam">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="select" class="col-lg-2 control-label">Away team (by seed)</label>
+                  <div class="col-lg-10">
+                    <input type="number" min="1" class="form-control" ng-model="match.awayTeam">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="select" class="col-lg-2 control-label">Group</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" ng-model="match.group">
+                      <option>group A</option>
+                      <option>group B</option>
+                      <option>group C</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                        <label class="col-lg-2 control-label">Properties</label>
+                        <div class="col-lg-10">
+                           <div class="checkbox">
+                              <label>
+                              <input type="checkbox"> Possible draw
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+
+
+              </div>
+              <div ng-show="match.nextStepType == 'playoff'">
+                <hr>
+                <div class="form-group">
+                  <label for="select" class="col-lg-2 control-label">Description</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" placeholder="quaterfinals etc." ng-model="match.description">
+                  </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Winner</label>
+                  <div class="col-lg-10">
+                    <div class="radio">
+                      <label>
+                      <input id="nextStep" type="radio" ng-model="match.nextStepTypeWinner" value="nextStep">
+                      will be continue
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                      <input id="finalPlace" type="radio" ng-model="match.nextStepTypeWinner"" value="finalPlace">
+                      ends at the final place
+                      </label>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-5">
-                  <div class="form-group" ng-show="placements[$index+1].nextStepType == 'nextStep'">
-                    <select class="form-control" ng-model="placements[$index+1].nextStep">
+                <div class="form-group" ng-show="match.nextStepTypeWinner == 'nextStep'">
+                  <label class="col-lg-2 control-label">Next step</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" ng-model="match.nextStepWinner">
                       <option>finals</option>
                       <option>3rd</option>
                     </select>
                   </div>
-                  <div class="form-group" ng-show="placements[$index+1].nextStepType == 'finalPlace'">
-                    <input type="number" min="1" class="form-control" ng-model="placements[$index+1].finalPlace">
+                </div>
+                <div class="form-group" ng-show="match.nextStepTypeWinner == 'finalPlace'">
+                  <label class="col-lg-2 control-label">Final place</label>
+                  <div class="col-lg-10">
+                    <input type="number" min="1" class="form-control" ng-model="match.finalPlaceWinner">
+                  </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Looser</label>
+                  <div class="col-lg-10">
+                    <div class="radio">
+                      <label>
+                      <input id="nextStep" type="radio" ng-model="match.nextStepTypeLooser" value="nextStep">
+                      will be continue
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                      <input id="finalPlace" type="radio" ng-model="match.nextStepTypeLooser"" value="finalPlace">
+                      ends at the final place
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group" ng-show="match.nextStepTypeLooser == 'nextStep'">
+                  <label class="col-lg-2 control-label">Next step</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" ng-model="match.nextStepLooser">
+                      <option>finals</option>
+                      <option>3rd</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group" ng-show="match.nextStepTypeLooser == 'finalPlace'">
+                  <label class="col-lg-2 control-label">Final place</label>
+                  <div class="col-lg-10">
+                    <input type="number" min="1" class="form-control" ng-model="match.finalPlaceLooser">
                   </div>
                 </div>
               </div>
               <hr>
               <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                  <button type="submit" class="btn btn-default" ng-disabled="newTournament.$invalid"><b>Create group</b></button>
+                  <button type="submit" class="btn btn-default" ng-disabled="newMatch.$invalid"><b>Create match</b></button>
                 </div>
               </div>
             </fieldset>

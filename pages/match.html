@@ -1,21 +1,80 @@
 <div id="wrapper">
     <div id="page-wrapper">
+        <ul class="breadcrumb">
+            <li><a href="#">Tournaments</a></li>
+            <li><a href="tournament/1">Prague Winter</a></li>
+            <li class="active">Match</li>
+        </ul>
         <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default" ng-controller="matchModalsCtrl as $ctrl">
+                    <div class="panel-heading">
+                        <i class="glyphicon glyphicon-send fa-fw"></i> Organizer choices
+                    </div>
+                    <div class="panel-body">
+                        <div class="btn-block">
+                            <div class="btn-group"> 
+                                <a href="tournament-matches" class="btn btn-default" disabled>Start the match</a>
+                                <a href="tournament-groups" class="btn btn-default" disabled>End the match</a>
+                                <a class="btn btn-default" ng-click="$ctrl.enterResult()">Enter the result</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="glyphicon glyphicon-record"></i> Score
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <center>
+                                <div class="col-lg-4">
+                                    <h3>Žlutá Zimnice</h3>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h1>10:9</h1>
+                                    <span class="label label-success">zápas právě probíhá</span>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h3>FUJ</h3>
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="glyphicon glyphicon-bookmark fa-fw"></i> Detail
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Čtvrtfinále (GF2)</li>
+                            <li><a href="" data-toggle="modal" data-target="#teamDetailModal">Žlutá Zimnice</a> - <a href="" data-toggle="modal" data-target="#teamDetailModal">FUJ</a></li>
+                            <li>13. 6. 2016 16:15 - 16:40</li>
+                            <li>main field</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Žlutá Zimnice - FUJ</h1>
             </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <!-- /.row -->
-        <div class="row">
+            </div>
+            <div class="row">
             <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="glyphicon glyphicon-play fa-fw"></i> Průběh
                     </div>
-                    <!-- /.panel-heading -->
                     <div class="panel-body">
-
                         <center>
                             <h1>10:9</h1>
                             <span class="label label-success">zápas právě probíhá</span>
@@ -147,224 +206,214 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.panel-body -->
                 </div>
             </div>
             <div class="col-lg-5">
-            <div class="panel panel-default">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="glyphicon glyphicon-king fa-fw"></i> Hráčské statistiky
                     </div>
-                    <!-- /.panel-heading -->
                     <div class="panel-body">
-
                         <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Pořadí</th>
-                            <th>Jméno a příjmení</th>
-                            <th>Číslo dresu</th>
-                            <th>Asistencí</th>
-                            <th>Bodů</th>
-                            <th>Celkem</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="info">
-                            <td>1</td>
-                            <td>Jan Novák</td>
-                            <td>97</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>2</td>
-                            <td>Sabina Nová</td>
-                            <td>14</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Jaroslav Veselý</td>
-                            <td>10</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>4</td>
-                            <td>Marek Dostál</td>
-                            <td>2</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Karolína Zubatá</td>
-                            <td>78</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Pepek Nový</td>
-                            <td>51</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>František Nový</td>
-                            <td>81</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>8</td>
-                            <td>Jan Malý</td>
-                            <td>23</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>Alena Malá</td>
-                            <td>17</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Jan Cimbuří</td>
-                            <td>1</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>11</td>
-                            <td>Karel Koláček</td>
-                            <td>34</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>12</td>
-                            <td>Jan Novák</td>
-                            <td>97</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>13</td>
-                            <td>Sabina Nová</td>
-                            <td>14</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>Jaroslav Veselý</td>
-                            <td>10</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>15</td>
-                            <td>Marek Dostál</td>
-                            <td>2</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>16</td>
-                            <td>Karolína Zubatá</td>
-                            <td>78</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>17</td>
-                            <td>Pepek Nový</td>
-                            <td>51</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>18</td>
-                            <td>František Nový</td>
-                            <td>81</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>19</td>
-                            <td>Jan Malý</td>
-                            <td>23</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>20</td>
-                            <td>Alena Malá</td>
-                            <td>17</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr class="info">
-                            <td>21</td>
-                            <td>Jan Cimbuří</td>
-                            <td>1</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                        <tr>
-                            <td>22</td>
-                            <td>Karel Koláček</td>
-                            <td>34</td>
-                            <td>21</td>
-                            <td>9</td>
-                            <td><b>30</b></td>
-                        </tr>
-                    </tbody>
-                </table>
+                            <thead>
+                                <tr>
+                                    <th>Pořadí</th>
+                                    <th>Jméno a příjmení</th>
+                                    <th>Číslo dresu</th>
+                                    <th>Asistencí</th>
+                                    <th>Bodů</th>
+                                    <th>Celkem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="info">
+                                    <td>1</td>
+                                    <td>Jan Novák</td>
+                                    <td>97</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>2</td>
+                                    <td>Sabina Nová</td>
+                                    <td>14</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Jaroslav Veselý</td>
+                                    <td>10</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>4</td>
+                                    <td>Marek Dostál</td>
+                                    <td>2</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Karolína Zubatá</td>
+                                    <td>78</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Pepek Nový</td>
+                                    <td>51</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>František Nový</td>
+                                    <td>81</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>8</td>
+                                    <td>Jan Malý</td>
+                                    <td>23</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Alena Malá</td>
+                                    <td>17</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Jan Cimbuří</td>
+                                    <td>1</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>11</td>
+                                    <td>Karel Koláček</td>
+                                    <td>34</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>12</td>
+                                    <td>Jan Novák</td>
+                                    <td>97</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>13</td>
+                                    <td>Sabina Nová</td>
+                                    <td>14</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>Jaroslav Veselý</td>
+                                    <td>10</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>15</td>
+                                    <td>Marek Dostál</td>
+                                    <td>2</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>Karolína Zubatá</td>
+                                    <td>78</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td>Pepek Nový</td>
+                                    <td>51</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>18</td>
+                                    <td>František Nový</td>
+                                    <td>81</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>19</td>
+                                    <td>Jan Malý</td>
+                                    <td>23</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>20</td>
+                                    <td>Alena Malá</td>
+                                    <td>17</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr class="info">
+                                    <td>21</td>
+                                    <td>Jan Cimbuří</td>
+                                    <td>1</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                                <tr>
+                                    <td>22</td>
+                                    <td>Karel Koláček</td>
+                                    <td>34</td>
+                                    <td>21</td>
+                                    <td>9</td>
+                                    <td><b>30</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- /.panel-body -->
                 </div>
             </div>
-            <!-- /.col-lg-8 -->
             <div class="col-lg-3">
-
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="glyphicon glyphicon-send fa-fw"></i> Akce
                     </div>
-                    <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="btn-group-vertical btn-block">
-                            <!-- <button type="button" class="btn btn-default btn-block"> -->
-                            <!-- Křížová tabulka -->
-                            <!-- </button> -->
                             <a href="" data-toggle="modal" data-target="#crossTableSpiritModal" class="btn btn-success"><b>Zahájit zápas</b></a>
                             <a href="" data-toggle="modal" data-target="#crossTableSpiritModal" class="btn btn-primary"><b>Zadat výsledek</b></a>
                             <a href="" data-toggle="modal" data-target="#crossTableSpiritModal" class="btn btn-danger"><b>Ukončit zápas</b></a>
@@ -381,14 +430,11 @@
                             <a href="" data-toggle="modal" data-target="#spiritModal" class="btn btn-success"><i class="glyphicon glyphicon-heart fa-fw"></i> <b>FUJ</b></a>
                         </div>
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="glyphicon glyphicon-bookmark fa-fw"></i> Detail
                     </div>
-                    <!-- /.panel-heading -->
                     <div class="panel-body">
                         <ul>
                             <li><a href="tournament">Partie Pinčlů</a></li>
@@ -399,9 +445,7 @@
                             <li>Hřiště: 1</li>
                         </ul>
                     </div>
-                    <!-- /.panel-body -->
                 </div>
-                <!-- /.panel -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="glyphicon glyphicon-heart fa-fw"></i> Spirit of the Game
@@ -415,8 +459,9 @@
                             <li>Pozitivní přístup a sebeovládání: 3 body</li>
                             <li>Komunikace: 2 body</li>
                             <li><b>Celkem: 12 bodů</b></li>
-                            <li>Komentář: <em>Soupeř nechtěl komunikovat a často hru zdržoval.</em></li></ul>
-                            </li>
+                            <li>Komentář: <em>Soupeř nechtěl komunikovat a často hru zdržoval.</em></li>
+                        </ul>
+                        </li>
                         </ul>
                         <h5><b>FUJ</b></h5>
                         <ul>
@@ -428,18 +473,11 @@
                             <li><b>Celkem: 13 bodů</b></li>
                         </ul>
                     </div>
-                    <!-- /.panel-body -->
                 </div>
             </div>
-            <!-- /.col-lg-4 -->
-        </div>
-        <!-- /.row -->
+            </div> -->
     </div>
-    <!-- /#page-wrapper -->
 </div>
-<!-- /#wrapper -->
-
-<!-- Team Detail Modal -->
 <div class="modal fade" id="teamDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -634,8 +672,6 @@
         </div>
     </div>
 </div>
-
-<!-- Spirit Modal -->
 <div class="modal fade" id="spiritModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -644,23 +680,18 @@
                 <h4 class="modal-title" id="myModalLabel"><b>Spirit of the Game</b></h4>
             </div>
             <div class="modal-body">
-
-            <p>13. 6. 2016 16:15, Čtvrtfinále (GF2): FUJ <i class="glyphicon glyphicon-arrow-right fa-fw"></i> Žlutá Zimnice</p>
-
-            <h4>Znalost pravidel</h4>
-
-            <div class="btn-toolbar">
-  <div class="btn-group">
-    <a href="" class="btn btn-default">0</a>
-    <a href="" class="btn btn-default">1</a>
-    <a href="" class="btn btn-default">2</a>
-    <a href="" class="btn btn-default">3</a>
-    <a href="" class="btn btn-default">4</a>
-  </div>
-  </div>
-
-Fauly a tělesný kontakt, Férové smýšlení, Pozitivní přístup a sebeovládání, Komunikace, Celkem (samo se pocita)
-            
+                <p>13. 6. 2016 16:15, Čtvrtfinále (GF2): FUJ <i class="glyphicon glyphicon-arrow-right fa-fw"></i> Žlutá Zimnice</p>
+                <h4>Znalost pravidel</h4>
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <a href="" class="btn btn-default">0</a>
+                        <a href="" class="btn btn-default">1</a>
+                        <a href="" class="btn btn-default">2</a>
+                        <a href="" class="btn btn-default">3</a>
+                        <a href="" class="btn btn-default">4</a>
+                    </div>
+                </div>
+                Fauly a tělesný kontakt, Férové smýšlení, Pozitivní přístup a sebeovládání, Komunikace, Celkem (samo se pocita)
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
@@ -668,8 +699,6 @@ Fauly a tělesný kontakt, Férové smýšlení, Pozitivní přístup a sebeovl�
         </div>
     </div>
 </div>
-
-<!-- Point Detail Modal -->
 <div class="modal fade" id="editPointModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -679,7 +708,6 @@ Fauly a tělesný kontakt, Férové smýšlení, Pozitivní přístup a sebeovl�
             </div>
             <div class="modal-body">
                 <div class="row">
-                    
                     <div class="col-lg-6">
                         <h4>Skóroval</h4>
                         <div class="list-group">
@@ -692,8 +720,6 @@ Fauly a tělesný kontakt, Férové smýšlení, Pozitivní přístup a sebeovl�
                             <a href="" class="list-group-item"><b>#97</b> Jan Novák</a>
                         </div>
                     </div>
-                    <!-- TODO: Vlozit na novou stranu mozna jako vicekrokovy formular -->
-                    
                     <div class="col-lg-6">
                         <h4>Asistoval</h4>
                         <div class="list-group">
@@ -710,10 +736,39 @@ Fauly a tělesný kontakt, Férové smýšlení, Pozitivní přístup a sebeovl�
                 </div>
             </div>
             <div class="modal-footer">
-
-            <!--  TODO: podivat se na vsechna mista v kodu-->
                 <button type="button" class="btn btn-default" data-dismiss="modal">Zrušit nebo Zavřít</button>
             </div>
         </div>
     </div>
 </div>
+<script type="text/ng-template" id="enterResultMatchModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Enter result of the match</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="alert alert-dismissible alert-warning">
+            <h4>This option terminates the match!</h4>
+            <p>You can't edit the result after this entering for now. <b>Make sure you have correct result of the match.</b> We work on this possibility for future.</p>
+        </div>
+        <form class="form-horizontal" name="enterResultForm">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Home's score</label>
+                    <div class="col-lg-9">
+                        <input type="number" min="0" max="40" class="form-control" ng-model="result.home" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Away's score</label>
+                    <div class="col-lg-9">
+                        <input type="number" min="0" max="40" class="form-control" ng-model="result.away" required>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="enterResultForm.$invalid" ng-click="$ctrl.ok(result)">Terminate the match</button>
+        <button class="btn btn-default" ng-click="$ctrl.cancel()">Cancel</button>
+    </div>
+</script>

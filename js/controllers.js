@@ -297,3 +297,55 @@ catcher.controller('tournamentCtrl', ['$scope', '$routeParams', 'Tournament',
         });
     }
 ]);
+
+
+
+// MATCH ##################################################################################
+
+// Match controller
+catcher.controller('matchCtrl', ['$scope', '$routeParams',
+    function($scope, $routeParams) {
+        
+
+    }
+]);
+
+
+// Controller for modals in match page
+catcher.controller('matchModalsCtrl', function($uibModal, $log, $document) {
+    var $ctrl = this;
+
+    $ctrl.enterResult = function(result) {
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'enterResultMatchModal.html',
+            controller: 'enterResultCtrl',
+            controllerAs: '$ctrl',
+            resolve: {
+                result: function() {
+                    return result;
+                }
+            }
+        });
+    };
+});
+
+// Controller manages enter match's result
+catcher.controller('enterResultCtrl', ['$uibModalInstance', '$route', 'Flash',
+    function($uibModalInstance, $route, Flash) {
+
+
+        var $ctrl = this;
+        
+        $ctrl.ok = function(result) {
+            console.log(result)
+            $uibModalInstance.close();
+        };
+
+        $ctrl.cancel = function() {
+            $uibModalInstance.close();
+        };
+
+    }
+]);

@@ -14,8 +14,14 @@
     <ul class="nav navbar-top-links navbar-right">
       <li><a ng-hide="logged()" href="" ng-click="$ctrl.register()">Register</a></li>
       <li><a ng-hide="logged()" href="" ng-click="$ctrl.login()">Sign in</a></li>
-      <li ng-show="logged()" ><i class="glyphicon glyphicon-user fa-fw"></i> <b>{{getLogin()}}</b> ({{getRole()}})</li>
-      <li><a ng-show="logged()" ng-click="logout()" href="">Odhlásit se</a></li>
+      <li><a href="help">Help</a></li>
+      <li ng-show="logged()" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-user fa-fw"></i> <b>{{getLogin()}}</b> ({{getRole()}}) <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="settings"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+            <li><a ng-click="logout()" href=""><i class="glyphicon glyphicon-log-out"></i> Sign out</a></li>
+          </ul>
+        </li>
     </ul>
   </div>
   <!-- /.navbar-top-links -->
@@ -43,9 +49,6 @@
         </li> -->
         <li>
           <a href="history"><i class="glyphicon glyphicon-book fa-fw"></i> History</a>
-        </li>
-        <li>
-          <a href="settings" ng-show="logged()"><i class="glyphicon glyphicon-cog fa-fw"></i> Settings</a>
         </li>
         <!-- <li>
           <a href="about"><i class="glyphicon glyphicon-info-sign fa-fw"></i> About</a>

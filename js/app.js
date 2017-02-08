@@ -87,7 +87,7 @@ catcher.config(['$routeProvider', '$locationProvider', '$provide', '$httpProvide
         // match detail
         .when('/match', {
             templateUrl : 'pages/match.html',
-            // controller  : 'aboutCtrl'
+            controller  : 'matchCtrl'
         })
         // match detail
         .when('/admin', {
@@ -99,11 +99,11 @@ catcher.config(['$routeProvider', '$locationProvider', '$provide', '$httpProvide
             templateUrl : 'pages/add-tournament.html',
             controller  : 'addTournamentCtrl'
         })
-        // // match detail
-        // .when('/add-matches', {
-        //     templateUrl : 'pages/add-matches.html',
-        //     controller  : 'addMatchesCtrl'
-        // })
+        // help
+        .when('/help', {
+            templateUrl : 'pages/help.html',
+            // controller  : 'addMatchesCtrl'
+        })
         // add group
         .when('/add-group', {
             templateUrl : 'pages/add-group.html',
